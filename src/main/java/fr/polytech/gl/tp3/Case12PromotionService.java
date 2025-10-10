@@ -12,29 +12,23 @@ package fr.polytech.gl.tp3;
  */
 public class Case12PromotionService {
 
-    // ISSUE : complexité inutile
     public boolean existingIsPromoDay(String day) {
-        if ("MONDAY".equals(day)) {
-            return false;
-        } else if ("TUESDAY".equals(day)) {
-            return false;
-        } else if ("WEDNESDAY".equals(day)) {
+        if ("WEDNESDAY".equals(day)) {
             return true;
-        } else if ("THURSDAY".equals(day)) {
-            return false;
-        } else if ("FRIDAY".equals(day)) {
-            return true;
-        } else if ("SATURDAY".equals(day)) {
-            return false;
-        } else if ("SUNDAY".equals(day)) {
-            return false;
+        } else {
+          return false;
         }
-        return false;
     }
 
     // FEATURE : à implémenter
     public double applyPromo(double amount, String promoCode) {
         // TODO: implémenter selon la description
+        if ("FREE".equals(promoCode) && amount>100) {
+          amount=0;
+        }
+        if ("HALF".equals(promoCode)) {
+          amount=amount*0.5;
+        }
         return amount; // valeur par défaut
     }
 }
