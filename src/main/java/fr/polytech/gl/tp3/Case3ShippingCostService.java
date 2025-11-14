@@ -14,12 +14,19 @@ public class Case3ShippingCostService {
 
     // ISSUE : magic numbers non documentés
     public double existingBaseCost() {
-        return 5.0 + 1.0 * 3; // 3 kg "magique"
+        return 5.0 + 1.0 * 3.0; // 3 kg "magique"
     }
 
     // FEATURE : à implémenter
     public double computeShippingCost(double weightKg, boolean express) {
-        // TODO: implémenter la logique décrite dans JavaDoc
-        return 0.0; // volontairement faux
+
+        if (weightKg <= 0) {
+            throw new IllegalArgumentException("Le poids doit être supérieur à 0 kg.");
+        }
+
+        double base = 5.0 + Math.ceil(weightKg); // Math.ceil(value) permet d'arrondir la valeur à l'unité supérieur
+        if (express) base = base + 10.0;
+
+        return base;
     }
 }
