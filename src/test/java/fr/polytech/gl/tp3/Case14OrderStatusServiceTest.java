@@ -16,6 +16,15 @@ public class Case14OrderStatusServiceTest {
     Case14OrderStatusService service = new Case14OrderStatusService();
 
     @Test
+    void testexistingStatusLabel(){
+        assertEquals("Order created", service.existingStatusLabel("CREATED"));
+        assertEquals("Order paid", service.existingStatusLabel("PAID"));
+        assertEquals("Order shipped", service.nexistingStatusLabel("SHIPPED"));
+        assertEquals("Order delivered", service.existingStatusLabel("PAID"));
+        assertEquals("Unknown", service.existingStatusLabel());
+    }
+
+    @Test
     void testNextStatus() {
         assertEquals("PAID", service.nextStatus("CREATED"));
         assertEquals("SHIPPED", service.nextStatus("PAID"));
