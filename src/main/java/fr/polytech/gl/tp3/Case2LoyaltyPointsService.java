@@ -23,16 +23,20 @@ public class Case2LoyaltyPointsService {
             return "BRONZE";
         } else if (points < 200) {
             return "SILVER";
-        } else if (points >= 200) {
+        } else{
             return "GOLD";
-        } else {
-            return "UNUSED"; // branche inatteignable
         }
     }
 
     // FEATURE : à implémenter
     public int computeEarnedPoints(double orderAmount) {
-        // TODO: implémenter la logique décrite dans le commentaire ci-dessus
-        return -1; // volontairement faux
+        if(orderAmount<50){
+          return 10;
+        } else if (orderAmount<100) {
+          return 20;
+        }
+        else{
+          return 50;
+        }
     }
 }
