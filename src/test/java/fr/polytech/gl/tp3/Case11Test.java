@@ -10,7 +10,7 @@ public class Case11Test {
 
   @Test
   void nullAmount() {
-    assertEquals(0, service.computeVat(0, 20 / 100));
+    assertEquals(0, service.computeVat(0, .2));
   }
 
   @Test
@@ -20,21 +20,21 @@ public class Case11Test {
 
   @Test
   void normalCase() {
-    assertEquals(20, service.computeVat(100, 20 / 100));
+    assertEquals(20, service.computeVat(100, .2));
   }
 
   @Test
   void largeCase() {
-    assertEquals(5000000, service.computeVat(10000000, 50 / 100));
+    assertEquals(1_000_000, service.computeVat(5_000_000, .2));
   }
 
   @Test
   void negativeAmount() {
-    assertThrows(IllegalArgumentException.class, () -> service.computeVat(-100, 20 / 100));
+    assertThrows(IllegalArgumentException.class, () -> service.computeVat(-100, .2));
   }
 
   @Test
   void negativeRate() {
-    assertThrows(IllegalArgumentException.class, () -> service.computeVat(100, -20 / 100));
+    assertThrows(IllegalArgumentException.class, () -> service.computeVat(100, -.2));
   }
 }
