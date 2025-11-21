@@ -59,4 +59,6 @@ Les secrets Sonar (`SONAR_TOKEN`) et la configuration GitHub Pages sont supposé
 
 ---
 
+Rapport mutation testing : https://boubouuu.github.io/polytech-gl-tp-3/fr.polytech.gl.tp3/index.html
+
 © Usage pédagogique.

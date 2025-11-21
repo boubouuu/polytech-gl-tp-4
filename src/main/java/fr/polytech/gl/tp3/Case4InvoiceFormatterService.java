@@ -10,22 +10,20 @@ package fr.polytech.gl.tp3;
  * - Écrire au moins un test pour formatInvoiceNumber.
  */
 public class Case4InvoiceFormatterService {
-
-    // ISSUE : usage naïf de la concaténation dans une boucle
     public String existingFormat(String[] lines) {
-        String result = "";
-        if (lines == null) {
-            return result;
-        }
-        for (String line : lines) {
-            result = result + line + "\n";
-        }
-        return result;
+        return String.join("\n", lines);
     }
 
-    // FEATURE : à implémenter
     public String formatInvoiceNumber(String prefix, int id) {
         // TODO: implémenter selon la description
-        return "XXX"; // volontairement faux
+      if (prefix.isBlank() || prefix.isEmpty()) {
+        throw new IllegalArgumentException("Prefix cannot be null");
+      }
+
+      if (id <= 0) {
+        throw new IllegalArgumentException("Id cannot be inferior or equal to 0");
+      }
+
+      return String.format("%s-%03dID", prefix, id);
     }
 }
