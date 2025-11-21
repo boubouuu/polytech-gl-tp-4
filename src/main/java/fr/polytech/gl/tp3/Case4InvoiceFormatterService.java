@@ -15,7 +15,6 @@ public class Case4InvoiceFormatterService {
     }
 
     public String formatInvoiceNumber(String prefix, int id) {
-        // TODO: implémenter selon la description
       if (prefix.isBlank() || prefix.isEmpty()) {
         throw new IllegalArgumentException("Prefix cannot be null");
       }

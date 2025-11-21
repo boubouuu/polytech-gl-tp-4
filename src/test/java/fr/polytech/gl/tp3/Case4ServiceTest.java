@@ -24,12 +24,13 @@ public class Case4ServiceTest {
   void ExistingFormat_ShouldThrowError_WithPrefix() {
     Case4InvoiceFormatterService case4 = new Case4InvoiceFormatterService();
     assertThrows(IllegalArgumentException.class, () -> case4.formatInvoiceNumber("", 10));
+    assertThrows(IllegalArgumentException.class, () -> case4.formatInvoiceNumber("    ", 10));
   }
 
   @Test
   void ComputeShippingCost_NewFormatVoiceNumber() {
     Case4InvoiceFormatterService case4 = new Case4InvoiceFormatterService();
-    assertEquals("TEST-002ID", case4.formatInvoiceNumber("TEST", 2));
+    assertEquals("TEST-001ID", case4.formatInvoiceNumber("TEST", 1));
   }
 
   @Test
