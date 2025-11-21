@@ -13,23 +13,36 @@ package fr.polytech.gl.tp3;
  */
 public class Case14OrderStatusService {
 
-    // ISSUE : valeurs de statut en dur, répétées
+    private static final String CREATED = "CREATED";
+    private static final String PAID = "PAID";
+    private static final String SHIPPED = "SHIPPED";
+    private static final String DELIVERED = "DELIVERED";
+
     public String existingStatusLabel(String status) {
-        if ("CREATED".equals(status)) {
-            return "Order created";
+        switch (status) {
+            case CREATED:
+                return "Order created";
+            case PAID:
+                return "Order paid";
+            case SHIPPED:
+                return "Order shipped";
+            case DELIVERED:
+                return "Order delivered";
+            default:
+                return "Unknown";
         }
-        if ("CREATED".equals(status)) { // doublon
-            return "Order just created";
-        }
-        if ("PAID".equals(status)) {
-            return "Order paid";
-        }
-        return "Unknown";
     }
 
-    // FEATURE : à implémenter
     public String nextStatus(String current) {
-        // TODO: implémenter la transition de statut
-        return "TODO"; // volontairement faux
+        switch (current) {
+            case CREATED:
+                return PAID;
+            case PAID:
+                return SHIPPED;
+            case SHIPPED:
+                return DELIVERED;
+            default:
+                throw new IllegalArgumentException("Invalid status: " + current);
+        }
     }
 }
