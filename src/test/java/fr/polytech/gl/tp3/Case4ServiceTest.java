@@ -17,6 +17,7 @@ public class Case4ServiceTest {
   @Test
   void ExistingFormat_ShouldThrowError_WithId() {
     Case4InvoiceFormatterService case4 = new Case4InvoiceFormatterService();
+    assertThrows(IllegalArgumentException.class, () -> case4.formatInvoiceNumber("TEST", 0));
     assertThrows(IllegalArgumentException.class, () -> case4.formatInvoiceNumber("TEST", -1));
   }
 
@@ -24,7 +25,7 @@ public class Case4ServiceTest {
   void ExistingFormat_ShouldThrowError_WithPrefix() {
     Case4InvoiceFormatterService case4 = new Case4InvoiceFormatterService();
     assertThrows(IllegalArgumentException.class, () -> case4.formatInvoiceNumber("", 10));
-    assertThrows(IllegalArgumentException.class, () -> case4.formatInvoiceNumber("    ", 10));
+    assertThrows(IllegalArgumentException.class, () -> case4.formatInvoiceNumber("    ", 1));
   }
 
   @Test
