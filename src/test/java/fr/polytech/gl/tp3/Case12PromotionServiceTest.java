@@ -21,7 +21,7 @@ public class Case12PromotionServiceTest {
   void Case12PromotionCodeHalfbis() throws Exception {
     Case12PromotionService c12halfbis = new Case12PromotionService();
     double result= c12halfbis.applyPromo(11,"HALF");
-    assertEquals((double) 11 , result);
+    assertEquals((double) 11/2 , result);
   }
   @Test
   void case12PromotionCodeHalfTer() throws Exception {
@@ -56,7 +56,7 @@ public class Case12PromotionServiceTest {
   @Test
   void Case12PromotionServiceTest3() throws Exception {
     Case12PromotionService c12 = new Case12PromotionService();
-    boolean result = c12.existingIsPromoDay("Wednesday");
+    boolean result = c12.existingIsPromoDay("WEDNESDAY");
     assertEquals(true, result);
   }
 }
