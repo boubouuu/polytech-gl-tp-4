@@ -6,22 +6,46 @@ on:
   pull_request:
     branches: [ "main" ]
 
+# Permissions nécessaires pour GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # requis pour SonarCloud (historique)
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
+
       - name: Build & Test
         run: mvn -q -B clean verify
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Mutation testing (PIT)
+        # Assure-toi que le plugin pitest est bien défini dans le pom.xml
+        run: mvn -q -B pitest:mutationCoverage
+
       - name: Build summary
         if: always()
         run: |
@@ -29,8 +53,26 @@ jobs:
           echo "- Auteur : ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "- Branche : ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- Statut : ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # Prépare GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # On uploade le contenu du rapport PIT comme artefact pour Pages
+      - name: Upload PIT report for GitHub Pages
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: target/pit-reports
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      # url: ${{ steps.deployment.outputs.page_url }}  # optionnel si tu veux l’avoir dans l’UI
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

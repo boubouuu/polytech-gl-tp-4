@@ -87,7 +87,6 @@ public class App {
     // Case 11
     Case11TaxService c11 = new Case11TaxService();
     System.out.println("[Case11TaxService] existingVatLabel(100) = "
-      + c11.existingVatLabel(100.0)
       + " | computeVat(100, 0.2) = "
       + c11.computeVat(100.0, 0.2));
 

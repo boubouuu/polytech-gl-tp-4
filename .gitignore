@@ -9,3 +9,6 @@ target/
 # OS / Editors
 .vscode/
 *.swp
+.classpath
+.project
+.settings/

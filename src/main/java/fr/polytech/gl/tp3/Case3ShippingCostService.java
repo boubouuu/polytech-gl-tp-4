@@ -11,15 +11,16 @@ package fr.polytech.gl.tp3;
  * - Écrire au moins un test unitaire pour computeShippingCost.
  */
 public class Case3ShippingCostService {
-
-    // ISSUE : magic numbers non documentés
     public double existingBaseCost() {
-        return 5.0 + 1.0 * 3; // 3 kg "magique"
+        return 5.0 + 1.0 * 3;
     }
 
     // FEATURE : à implémenter
     public double computeShippingCost(double weightKg, boolean express) {
-        // TODO: implémenter la logique décrite dans JavaDoc
-        return 0.0; // volontairement faux
+      if (weightKg <= 0) {
+        throw new IllegalArgumentException("Weight cannot be lower or equal to 0 ");
+      }
+
+      return 5 + weightKg + (express ? 10 : 0);
     }
 }

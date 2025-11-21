@@ -10,28 +10,22 @@ package fr.polytech.gl.tp3;
  * - Écrire au moins un test unitaire pour calculateDiscountedPrice.
  */
 public class Case1DiscountService {
-
-    // ISSUE : duplication de littéraux ("DISCOUNT")
     public String existingDiscountLabel(String code) {
-        if (code == null) {
-            return "DISCOUNT"; // littéral dupliqué
-        }
-        if (code.isBlank()) {
-            return "DISCOUNT"; // littéral dupliqué
+        if (code == null || code.isBlank()) {
+            return "DISCOUNT";
         }
         return "DISCOUNT-" + code; // même base
     }
 
-    // FEATURE : à implémenter
+
     public double calculateDiscountedPrice(double amount, double rate) {
-        // - si amount < 0 ou rate < 0 ou rate > 1 -> IllegalArgumentException
-        // - sinon, retourner amount * (1 - rate)
-        if (amount <0 || rate <0 || rate>1){
-            IllegalArgumentException e = new IllegalArgumentException();
-            throw e;
-        }
-        else{
-            return amount * (1- rate);
-        }
+      if (rate < 0 || rate > 1) {
+        throw new IllegalArgumentException("Rate value must be between 0 and 1");
+      }
+
+      if (amount < 0) {
+        throw new IllegalArgumentException("Amount value must be superior at 0");
+      }
+      return amount * (1 - rate);
     }
 }

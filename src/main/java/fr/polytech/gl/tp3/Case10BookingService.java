@@ -10,15 +10,15 @@ package fr.polytech.gl.tp3;
  * - Écrire au moins un test unitaire pour canBook.
  */
 public class Case10BookingService {
+  public boolean existingIsOverlapping(int start1, int end1, int start2, int end2) {
+    return !(end1 < start2 || end2 < start1);
+  }
 
-    // ISSUE : détection de chevauchement incorrecte
-    public boolean existingIsOverlapping(int start1, int end1, int start2, int end2) {
-        return start1 == start2 && end1 == end2; // cas trivial seulement
+  public boolean canBook(int[][] existingSlots, int newStart, int newEnd) {
+    for (int[] slot : existingSlots) {
+      if (existingIsOverlapping(slot[0], slot[1], newStart, newEnd))
+        return false;
     }
-
-    // FEATURE : à implémenter
-    public boolean canBook(int[][] existingSlots, int newStart, int newEnd) {
-        // TODO: implémenter une vraie détection de chevauchement
-        return false; // volontairement faux
-    }
+    return true;
+  }
 }
