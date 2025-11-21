@@ -17,14 +17,14 @@ public class Case1ServiceTest {
   @Test
   void CalculateDiscountedPrice_ShouldThrow_ErrorRate() {
     Case1DiscountService case1 = new Case1DiscountService();
-    assertThrows(IllegalArgumentException.class, () -> case1.calculateDiscountedPrice(1, -1.0));
-    assertThrows(IllegalArgumentException.class, () -> case1.calculateDiscountedPrice(1, 2.0));
+    assertThrows(IllegalArgumentException.class, () -> case1.calculateDiscountedPrice(0, -0.1);
+    assertThrows(IllegalArgumentException.class, () -> case1.calculateDiscountedPrice(0, 1.1);
   }
 
   @Test
   void CalculateDiscountedPrice_ShouldThrow_ErrorAmount() {
     Case1DiscountService case1 = new Case1DiscountService();
-    assertThrows(IllegalArgumentException.class, () -> case1.calculateDiscountedPrice(-1, 0.2));
+    assertThrows(IllegalArgumentException.class, () -> case1.calculateDiscountedPrice(-0.1, 0.2));
   }
 
   @Test
@@ -36,7 +36,9 @@ public class Case1ServiceTest {
   @Test
   void CalculateDiscountedPrice_LabelEmpty() {
     Case1DiscountService case1 = new Case1DiscountService();
+    assertEquals("DISCOUNT", case1.existingDiscountLabel(null));
     assertEquals("DISCOUNT", case1.existingDiscountLabel(""));
+    assertEquals("DISCOUNT", case1.existingDiscountLabel("  "));
   }
 
   @Test
