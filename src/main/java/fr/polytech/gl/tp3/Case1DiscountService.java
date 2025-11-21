@@ -13,7 +13,7 @@ public class Case1DiscountService {
 
     // ISSUE : duplication de littéraux ("DISCOUNT")
     public String existingDiscountLabel(String code) {
-        if (code == null) {
+        if (code == "") {
             return "DISCOUNT"; // littéral dupliqué
         }
         if (code.isBlank()) {
