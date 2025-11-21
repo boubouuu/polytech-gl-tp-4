@@ -24,9 +24,14 @@ public class Case1DiscountService {
 
     // FEATURE : à implémenter
     public double calculateDiscountedPrice(double amount, double rate) {
-        // TODO: implémenter :
         // - si amount < 0 ou rate < 0 ou rate > 1 -> IllegalArgumentException
         // - sinon, retourner amount * (1 - rate)
-        return 0.0; // volontairement faux
+        if (amount <0 || rate <0 || rate>1){
+            IllegalArgumentException e = new IllegalArgumentException();
+            throw e;
+        }
+        else{
+            return amount * (1- rate);
+        }
     }
 }
