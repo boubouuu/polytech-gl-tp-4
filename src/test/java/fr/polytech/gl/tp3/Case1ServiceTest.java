@@ -38,7 +38,7 @@ public class Case1ServiceTest {
     Case1DiscountService case1 = new Case1DiscountService();
     assertEquals("DISCOUNT", case1.existingDiscountLabel(null));
     assertEquals("DISCOUNT", case1.existingDiscountLabel(""));
-    assertEquals("DISCOUNT", case1.existingDiscountLabel("   "));
+    assertEquals("DISCOUNT", case1.existingDiscountLabel("  "));
   }
 
   @Test
