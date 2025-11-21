@@ -5,23 +5,36 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/*
- * Test minimal pour exercer la méthode main.
- * L'objectif est simplement de vérifier que l'application démarre
- * sans lever d'exception, ce qui suffit à couvrir la classe App
- * dans les rapports Jacoco / Sonar.
- */
 public class Case11Test {
-
-  Case11TaxService service = new Case11TaxService();
+  final Case11TaxService service = new Case11TaxService();
 
   @Test
-  void testComputeVat() {
-    assertEquals(-1, service.computeVat(-1, 15));
-    assertEquals(-1, service.computeVat(15, -1));
-    assertEquals(0, service.computeVat(0, 12));
-    assertEquals(0, service.computeVat(12, 0));
-    assertEquals(100, service.computeVat(10, 10));
-    assertEquals(-1, service.computeVat(-1, -1));
+  void nullAmount() {
+    assertEquals(0, service.computeVat(0, 20 / 100));
+  }
+
+  @Test
+  void nullRate() {
+    assertEquals(0, service.computeVat(100, 0));
+  }
+
+  @Test
+  void normalCase() {
+    assertEquals(20, service.computeVat(100, 20 / 100));
+  }
+
+  @Test
+  void largeCase() {
+    assertEquals(5000000, service.computeVat(10000000, 50 / 100));
+  }
+
+  @Test
+  void negativeAmount() {
+    assertThrows(IllegalArgumentException.class, () -> service.computeVat(-100, 20 / 100));
+  }
+
+  @Test
+  void negativeRate() {
+    assertThrows(IllegalArgumentException.class, () -> service.computeVat(100, -20 / 100));
   }
 }
