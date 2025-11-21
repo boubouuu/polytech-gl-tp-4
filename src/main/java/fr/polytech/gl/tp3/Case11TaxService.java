@@ -10,16 +10,24 @@ package fr.polytech.gl.tp3;
  * - Écrire au moins un test unitaire sur computeVat.
  */
 public class Case11TaxService {
+  double tva = 0;
+  // ISSUE : paramètre jamais utilisé
+  public String existingVatLabel(double amount) {
+    // double unused = amount; // inutilisé
+    return "TVA standard";
+  }
 
-    // ISSUE : paramètre jamais utilisé
-    public String existingVatLabel(double amount) {
-        double unused = amount; // inutilisé
-        return "TVA standard";
+  // FEATURE : à implémenter
+  public double computeVat(double amount, double rate) {
+    if (amount < 0 || rate < 0)
+    {
+      return -1;
     }
-
-    // FEATURE : à implémenter
-    public double computeVat(double amount, double rate) {
-        // TODO: implémenter en gérant les entrées invalides
-        return 0; // volontairement faux
+    else
+    {
+      tva = amount * rate;
+      return tva;
     }
+    // TODO: implémenter en gérant les entrées invalides
+  }
 }
